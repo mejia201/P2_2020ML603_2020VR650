@@ -9,94 +9,97 @@
     var casos = ViewData["listadoCasos"];
 
 }
-
-<div class="text-center">
-    <h5 class="display-4">Registro de Covid</h5>
-    <p class="mb-4">
-        El siguiente formulario es para llevar el registro de casos reportados de
-        Covid por departamento y género.
-    </p>
-</div>
-
-
-<h4 class="mb-1">Reportar Casos</h4>
-<br/>
-
-
-<form class="form" asp-action="InsertarCasos" id="equipos_form">
-    @*Inicio del formulario*@
-
-    <div class="row">
-
-		<div class="col-sm-6">
-			<label class="mb-2">Departamento</label>
-			@Html.DropDownList("id_departamento" , departamento as SelectList, "Seleccione uno" , new {@class="form-control mb-3"})
-		</div>
-
-		<div class="col-sm-6">
-            <label class="mb-2">Genero</label>
-			@Html.DropDownList("id_genero" , genero as SelectList, "Seleccione uno" , new {@class="form-control mb-3"})
-		</div>
-
-    </div>
-   
-    <div class="row mb-2">
-
-        <div class="col-sm-4">
-			<label>Casos Confirmados</label>
-            @Html.TextBox("casos_confirmados" , "" , new {@class="form-control mb-3"})
-        </div>
-
-
-         <div class="col-sm-4">
-			<label>Número de Recuperados</label>
-			@Html.TextBox("casos_recuperados" , "" , new {@class="form-control mb-3"})
-        </div>
-
-
-        <div class="col-sm-4">
-			<label>Número de Fallecidos</label>
-			@Html.TextBox("fallecidos" , "" , new {@class="form-control mb-3"})
-        </div>
-
+<div  style="background-color: #eaeaea; border-radius:5px">
+    <div class="text-center">
+        <h5 class="display-4">Registro de Covid</h5>
+        <p class="mb-4">
+            El siguiente formulario es para llevar el registro de casos reportados de <br />
+            Covid por departamento y género.
+        </p>
     </div>
 
-    <div class="form-group row mb-4">
-        <div class="col-sm-12">
-            <input type="submit" class="btn btn-success form-control" value="Guardar Registro" />
+
+    <h4 class="mb-1" style="padding-top:100px">Reportar Casos</h4>
+    <br />
+
+
+    <form class="form" asp-action="InsertarCasos" id="equipos_form" style="background-color: #eaeaea; margin:25px">
+        @*Inicio del formulario*@
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label class="mb-2">Departamento</label>
+                @Html.DropDownList("id_departamento", departamento as SelectList, "Seleccione uno", new { @class = "form-control mb-3" })
+            </div>
+
+            <div class="col-sm-6">
+                <label class="mb-2">Genero</label>
+                @Html.DropDownList("id_genero", genero as SelectList, "Seleccione uno", new { @class = "form-control mb-3" })
+            </div>
+
         </div>
-    </div>
 
-    @*Fin del formulario*@
-</form>
+        <div class="row mb-2">
+
+            <div class="col-sm-4">
+                <label>Casos Confirmados</label>
+                @Html.TextBox("casos_confirmados", "", new { @class = "form-control mb-3" })
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Número de Recuperados</label>
+                @Html.TextBox("casos_recuperados", "", new { @class = "form-control mb-3" })
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Número de Fallecidos</label>
+                @Html.TextBox("fallecidos", "", new { @class = "form-control mb-3" })
+            </div>
+
+        </div>
+
+        <div class="form-group row  mt-4">
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-success form-control" value="Guardar Registro" />
+            </div>
+        </div>
+
+        @*Fin del formulario*@
+    </form>
 
 
 
-<div class="container row p-3">
-    <div class="col-md-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Departamento</th>
-                    <th>Genero</th>
-                    <th>Confirmados</th>
-                    <th>Recuperados</th>
-                    <th>Fallecidos</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (CasosReportados caso in (IEnumerable<CasosReportados>)casos)
-                {
+    <div class="container row p-3 mt-5">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@caso.departamento</td>
-                        <td>@caso.genero</td>
-                        <td>@caso.confirmados</td>
-                        <td>@caso.recuperados</td>
-                        <td>@caso.fallecidos</td>
+                        <th>Departamento</th>
+                        <th>Genero</th>
+                        <th>Confirmados</th>
+                        <th>Recuperados</th>
+                        <th>Fallecidos</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach (CasosReportados caso in (IEnumerable<CasosReportados>)casos)
+                    {
+                        <tr>
+                            <td>@caso.departamento</td>
+                            <td>@caso.genero</td>
+                            <td>@caso.confirmados</td>
+                            <td>@caso.recuperados</td>
+                            <td>@caso.fallecidos</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
+
