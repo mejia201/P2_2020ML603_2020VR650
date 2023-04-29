@@ -1,0 +1,59 @@
+@model IEnumerable<P2_2020ML603_2020VR650.Models.Casos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_departamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.casos_confirmados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.casos_recuperados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fallecidos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_departamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casos_confirmados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casos_recuperados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fallecidos)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_caso">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id_caso">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_caso">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
