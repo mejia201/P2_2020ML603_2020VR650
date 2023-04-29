@@ -8,9 +8,9 @@ namespace P2_2020ML603_2020VR650.Models
         public int id_departamento { get; set; }
 
         public int id_genero { get; set; }
-        public string? casos_confirmados { get; set; }
-        public string? casos_recuperados { get; set; }
-        public string? fallecidos { get; set; }
+        public int? casos_confirmados { get; set; }
+        public int? casos_recuperados { get; set; }
+        public int? fallecidos { get; set; }
 
 
 

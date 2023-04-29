@@ -1,59 +1,102 @@
-@model IEnumerable<P2_2020ML603_2020VR650.Models.Casos>
+﻿@using P2_2020ML603_2020VR650.Controllers;
+@using P2_2020ML603_2020VR650.Models;
+
 
 @{
-    ViewData["Title"] = "Index";
+
+    var departamento = ViewData["listaDepartamento"];
+    var genero = ViewData["listaGenero"];
+    var casos = ViewData["listadoCasos"];
+
 }
 
-<h1>Index</h1>
+<div class="text-center">
+    <h5 class="display-4">Registro de Covid</h5>
+    <p class="mb-4">
+        El siguiente formulario es para llevar el registro de casos reportados de
+        Covid por departamento y género.
+    </p>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id_departamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id_genero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.casos_confirmados)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.casos_recuperados)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fallecidos)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_departamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_genero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.casos_confirmados)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.casos_recuperados)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fallecidos)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_caso">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_caso">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_caso">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<h4 class="mb-1">Reportar Casos</h4>
+<br/>
+
+
+<form class="form" asp-action="InsertarCasos" id="equipos_form">
+    @*Inicio del formulario*@
+
+    <div class="row">
+
+		<div class="col-sm-6">
+			<label class="mb-2">Departamento</label>
+			@Html.DropDownList("id_departamento" , departamento as SelectList, "Seleccione uno" , new {@class="form-control mb-3"})
+		</div>
+
+		<div class="col-sm-6">
+            <label class="mb-2">Genero</label>
+			@Html.DropDownList("id_genero" , genero as SelectList, "Seleccione uno" , new {@class="form-control mb-3"})
+		</div>
+
+    </div>
+   
+    <div class="row mb-2">
+
+        <div class="col-sm-4">
+			<label>Casos Confirmados</label>
+            @Html.TextBox("casos_confirmados" , "" , new {@class="form-control mb-3"})
+        </div>
+
+
+         <div class="col-sm-4">
+			<label>Número de Recuperados</label>
+			@Html.TextBox("casos_recuperados" , "" , new {@class="form-control mb-3"})
+        </div>
+
+
+        <div class="col-sm-4">
+			<label>Número de Fallecidos</label>
+			@Html.TextBox("fallecidos" , "" , new {@class="form-control mb-3"})
+        </div>
+
+    </div>
+
+    <div class="form-group row mb-4">
+        <div class="col-sm-12">
+            <input type="submit" class="btn btn-success form-control" value="Guardar Registro" />
+        </div>
+    </div>
+
+    @*Fin del formulario*@
+</form>
+
+
+
+<div class="container row p-3">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Departamento</th>
+                    <th>Genero</th>
+                    <th>Confirmados</th>
+                    <th>Recuperados</th>
+                    <th>Fallecidos</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (CasosReportados caso in (IEnumerable<CasosReportados>)casos)
+                {
+                    <tr>
+                        <td>@caso.departamento</td>
+                        <td>@caso.genero</td>
+                        <td>@caso.confirmados</td>
+                        <td>@caso.recuperados</td>
+                        <td>@caso.fallecidos</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
